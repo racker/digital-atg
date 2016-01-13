@@ -12,7 +12,6 @@ Make sure git, java 1.7, ATG 11.1 and ant are installed
 
 4) ant clean all
 
-
 This should build the required assets and then create a module RAX within ATG installation folder. The module to include with your BCC ear is RAX.Cloud
 
 REST Support:
