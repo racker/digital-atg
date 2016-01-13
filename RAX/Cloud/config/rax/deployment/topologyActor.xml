@@ -39,6 +39,38 @@
   </actor-chain>
   <actor-chain id="update-success" transaction="TX_SUPPORTS">
   </actor-chain>
+
+  <!--  This chain is used to make the  topology environment live -->
+  <actor-chain id="initialize" transaction="TX_SUPPORTS">
+    <form id="initializeTopologyFormHandler" name="/atg/epub/deployment/TopologyEditFormHandler"
+      var="initializeTopologyFormHandler" handle="initializeTopology"  requires-session-confirmation="false">
+      <input name="failureURL" value="/model/rax/deployment/TopologyActor/initialize-error" />
+      <input name="successURL" value="/model/rax/deployment/TopologyActor/initialize-success" />
+    </form>
+  </actor-chain>
+  <actor-chain id="intialize-error" transaction="TX_SUPPORTS">
+    <actor id="error" name="/rax/deployment/TopologyActor" chain-id="error" return-model-var="model">
+      <output id="model" add-map-children="true" value="${model}"/>
+    </actor>
+    </actor-chain>
+  <actor-chain id="initialize-success" transaction="TX_SUPPORTS">
+  </actor-chain>
+
+  <!--  This chain is used to revert the  topology environment -->
+  <actor-chain id="revert" transaction="TX_SUPPORTS">
+    <form id="revertTopologyFormHandler" name="/atg/epub/deployment/TopologyEditFormHandler"
+      var="revertTopologyFormHandler" handle="revertTopologyChanges"  requires-session-confirmation="false">
+      <input name="failureURL" value="/model/rax/deployment/TopologyActor/revert-error" />
+      <input name="successURL" value="/model/rax/deployment/TopologyActor/revert-success" />
+    </form>
+  </actor-chain>
+  <actor-chain id="revert-error" transaction="TX_SUPPORTS">
+    <actor id="error" name="/rax/deployment/TopologyActor" chain-id="error" return-model-var="model">
+      <output id="model" add-map-children="true" value="${model}"/>
+    </actor>
+    </actor-chain>
+  <actor-chain id="revert-success" transaction="TX_SUPPORTS">
+  </actor-chain>
   
   
 </actor-template>
