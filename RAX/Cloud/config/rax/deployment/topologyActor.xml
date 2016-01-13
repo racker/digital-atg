@@ -19,7 +19,7 @@
  
   </actor-chain>
   
-  <!--  This chain is used to apply order payment to a default payment group. -->
+  <!--  This chain is used to update topology environment -->
   <actor-chain id="update" transaction="TX_SUPPORTS">
     <form id="updateTopologyFormHandler" name="/atg/epub/deployment/TopologyEditFormHandler"
       var="updateTopologyFormHandler" handle="addAgentByTarget"  requires-session-confirmation="false">
