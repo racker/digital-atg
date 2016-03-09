@@ -24,6 +24,11 @@ curl -L -v -b customer_cooks.txt -H "Content-Type: application/json" "http://52.
 
 curl -L -v -b customer_cookies.txt -H "Content-Type: application/json" -d "{"targetName":\"Production\", "agentDisplayName":\"store-test01\", "description":\"store-test01\", "transportURL":\"rmi://test.com:20560/atg/epub/AgentTransport\" }" "http://52.2.31.4:20180/rest/model/rax/deployment/TopologyActor/update"
 
+3) To initialize once a new agent is added:
+
+curl -L -v -b customer_cookies.txt -H "Content-Type: applicaon/json" -d "{"targetName":\"Production\"}" "http://52.2.31.4:20180/rest/model/rax/deployment/TopologyActor/initialize"
+
+
 URL support:
 
 1) To obtain topology as an XML: 

@@ -33,7 +33,7 @@
        match the context-root setting in application.xml. -->
   <context-param>
     <param-name>context-root</param-name>
-    <param-value>raxcloud</param-value>
+    <param-value>/raxcloud</param-value>
   </context-param>
 
   <!-- Turn off preview for this app-->

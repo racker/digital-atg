@@ -17,7 +17,7 @@
         cloud.war
       </web-uri>
       <context-root>
-        raxcloud
+        /raxcloud
       </context-root>
     </web>
   </module>
