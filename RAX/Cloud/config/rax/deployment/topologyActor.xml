@@ -48,7 +48,7 @@
       <input name="successURL" value="/model/rax/deployment/TopologyActor/initialize-success" />
     </form>
   </actor-chain>
-  <actor-chain id="intialize-error" transaction="TX_SUPPORTS">
+  <actor-chain id="initialize-error" transaction="TX_SUPPORTS">
     <actor id="error" name="/rax/deployment/TopologyActor" chain-id="error" return-model-var="model">
       <output id="model" add-map-children="true" value="${model}"/>
     </actor>
@@ -70,6 +70,22 @@
     </actor>
     </actor-chain>
   <actor-chain id="revert-success" transaction="TX_SUPPORTS">
+  </actor-chain>
+  
+  <!--  This chain is used to delete the  topology environment -->
+  <actor-chain id="delete" transaction="TX_SUPPORTS">
+    <form id="deleteTopologyFormHandler" name="/atg/epub/deployment/TopologyEditFormHandler"
+      var="deleteTopologyFormHandler" handle="deleteMultipleAgents"  requires-session-confirmation="false">
+      <input name="failureURL" value="/model/rax/deployment/TopologyActor/delete-error" />
+      <input name="successURL" value="/model/rax/deployment/TopologyActor/delete-success" />
+    </form>
+  </actor-chain>
+  <actor-chain id="delete-error" transaction="TX_SUPPORTS">
+    <actor id="error" name="/rax/deployment/TopologyActor" chain-id="error" return-model-var="model">
+      <output id="model" add-map-children="true" value="${model}"/>
+    </actor>
+    </actor-chain>
+  <actor-chain id="delete-success" transaction="TX_SUPPORTS">
   </actor-chain>
   
   

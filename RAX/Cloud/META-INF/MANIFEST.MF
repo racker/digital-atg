@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 ATG-Client-Class-Path: lib/classes.jar
 ATG-Class-Path: lib/classes.jar
 ATG-Config-Path: config/config.jar
-ATG-Required-If-Present: DCS-UI SiteAdmin.Versioned
+ATG-Required: Publishing.base
 ATG-LiveConfig-Path: liveconfig
 Name: lib/classes.jar
 ATG-Client-Update-File: true
