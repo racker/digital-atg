@@ -75,7 +75,9 @@
   <!--  This chain is used to delete the  topology environment -->
   <actor-chain id="delete" transaction="TX_SUPPORTS">
     <form id="deleteTopologyFormHandler" name="/atg/epub/deployment/TopologyEditFormHandler"
-      var="deleteTopologyFormHandler" handle="deleteMultipleAgents"  requires-session-confirmation="false">
+      var="deleteTopologyFormHandler" handle="deleteAgent"  requires-session-confirmation="false">
+      <input name="agentDisplayName" value="${param.agentDisplayName}" />
+      <input name="targetName" value="${param.targetName}" />
       <input name="failureURL" value="/model/rax/deployment/TopologyActor/delete-error" />
       <input name="successURL" value="/model/rax/deployment/TopologyActor/delete-success" />
     </form>

@@ -28,6 +28,7 @@
 package com.rax.deployment;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,6 +36,7 @@ import javax.servlet.ServletException;
 
 import atg.core.util.StringUtils;
 import atg.deployment.common.DeploymentException;
+import atg.deployment.server.topology.AgentDef;
 import atg.deployment.server.topology.TargetDef;
 import atg.deployment.server.topology.TopologyDef;
 
@@ -80,7 +82,7 @@ public class UpdateTopologyFormHandler extends TopologyEditFormHandler {
 			IOException, ServletException {
 
 		vlogDebug("UpdateTopologyFormHandler: handleAddAgentViaRemote called");
-		setTargetID(findTarget(getTargetName()));
+		setTargetID(findTarget(getTargetName()).getID());
 		setAgentEssential(Boolean.FALSE);
 		String[] assetDestinations = { "/atg/epub/file/WWWFileSystem",
 				"/atg/epub/file/ConfigFileSystem" };
@@ -88,30 +90,69 @@ public class UpdateTopologyFormHandler extends TopologyEditFormHandler {
 		return super.handleAddAgent(pRequest, pResponse);
 	}
 
-	// Find targetID given target Name
-	@SuppressWarnings("unchecked")
-	private String findTarget(String targetName) throws DeploymentException {
-		if (StringUtils.isNotEmpty(targetName)) {
-			TopologyDef tDef = getDeploymentServer().getTopologyManager()
-					.getSurrogateTopology();
-			if (tDef != null) {
-				List<TargetDef> targets = tDef.getTargets();
-				if (targets != null) {
-					Iterator<TargetDef> it = targets.iterator();
-					TargetDef target = it.next();
-					String displayName = target.getDisplayName();
-					if (StringUtils.isNotEmpty(displayName)) {
-						if (displayName.trim().equalsIgnoreCase(
-								getTargetName().trim())) {
-							vlogDebug("Target to edit :" + target.getID());
-							return target.getID();
-						}
-					}
-				}
-
+	
+	
+	protected void preDeleteAgent (DynamoHttpServletRequest pRequest,DynamoHttpServletResponse pResponse) 
+	  throws IOException, ServletException {
+		if (StringUtils.isEmpty(getAgentID())) {
+			try {
+			  if (StringUtils.isNotEmpty(getTargetName()) && StringUtils.isNotEmpty(getAgentDisplayName())) {
+			    AgentDef agent = getAgentByName (findTarget(getTargetName().trim()),getAgentDisplayName().trim());
+			    if (agent != null) {
+			      vlogDebug(" Agent to be deleted with ID: " + agent.getID());
+				  setAgentID(agent.getID());
+			    }
+			  }
+			} catch (DeploymentException e) {
+				processException (null,"errorGeneral",pRequest,pResponse);
 			}
+			
 		}
-		return null;
+		 super.preDeleteAgent(pRequest, pResponse);
 	}
+	
+	// Return the Target based on the display name
+    @SuppressWarnings("unchecked")
+	private TargetDef findTarget (String pTargetName) throws DeploymentException {
+    	
+    	if (!StringUtils.isEmpty(pTargetName)) {
+    	  vlogDebug("Target name to obtain :" + pTargetName);
+    	  TopologyDef primary = getDeploymentServer().getTopologyManager().getSurrogateTopology();
+	      if (primary != null) {
+	      
+		    List <TargetDef> targets = primary.getTargets();
+	    	Iterator <TargetDef> it = targets.iterator();
+	    	while (it.hasNext()) {
+	    	  TargetDef target = it.next();
+	    	  if (pTargetName.equals (target.getDisplayName())) {
+	    		vlogDebug("Obtained target name with target id " + target.getID());
+	    	    return target;
+	    	  }	
+	    	}
+	      }
+    	}	
+    	vlogDebug("Could not obtain target for targetName  " + pTargetName);
+	    
+    	return null;
+    }
+    
+    @SuppressWarnings("unchecked")
+	private AgentDef getAgentByName (TargetDef pTarget, String pAgentName) throws DeploymentException {
+    	if (pTarget != null && !StringUtils.isEmpty(pAgentName)) {
+          vlogDebug("Agent Name to obtain: " + pAgentName);		
+    	  Collection<AgentDef> agents = pTarget.getAgents();
+    	  Iterator <AgentDef> it = agents.iterator();
+    	  while (it.hasNext()) {
+    		  AgentDef ag = it.next();
+    		  if (pAgentName.equals (ag.getDisplayName())) {
+    			vlogDebug("Found agent name with id :" + ag.getID());
+  	    	    return ag;
+  	    	  }
+    	  }
+      }
+      vlogDebug("Could not find agent name for agent :" + pAgentName);
+  	    
+      return null;
+    }
 
 }
