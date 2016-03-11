@@ -45,9 +45,10 @@ import atg.servlet.DynamoHttpServletRequest;
 import atg.servlet.DynamoHttpServletResponse;
 
 /**
- * Formhandler provides method to add agent to surrogate via remote means
+ * Formhandler provides method to add/delete agent to surrogate 
+ * via remote means
  * 
- * @author dev
+ * @author rkhamkar
  * 
  */
 public class UpdateTopologyFormHandler extends TopologyEditFormHandler {
@@ -91,7 +92,11 @@ public class UpdateTopologyFormHandler extends TopologyEditFormHandler {
 	}
 
 	
-	
+	/**
+	 * If target name is available, get the agent ID via targetName and agentName
+	 * This typically would be invoked via REST API calls where targetName is supplied
+	 * via json post parameters
+	 */
 	protected void preDeleteAgent (DynamoHttpServletRequest pRequest,DynamoHttpServletResponse pResponse) 
 	  throws IOException, ServletException {
 		if (StringUtils.isEmpty(getAgentID())) {
@@ -136,6 +141,8 @@ public class UpdateTopologyFormHandler extends TopologyEditFormHandler {
     	return null;
     }
     
+    // Return the AgentDef object based on the target and agent Name
+    // Return null if the agent cannot be located
     @SuppressWarnings("unchecked")
 	private AgentDef getAgentByName (TargetDef pTarget, String pAgentName) throws DeploymentException {
     	if (pTarget != null && !StringUtils.isEmpty(pAgentName)) {
