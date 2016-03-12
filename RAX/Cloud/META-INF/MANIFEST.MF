@@ -6,4 +6,3 @@ ATG-Required: Publishing.base
 ATG-LiveConfig-Path: liveconfig
 Name: lib/classes.jar
 ATG-Client-Update-File: true
-ATG-Web-Module: j2ee-apps/Cloudfront/cloud.war
