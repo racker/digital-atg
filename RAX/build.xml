@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="RAX Cloud" default="all" basedir="."> 
+<project name="RAX Versionsed" default="all" basedir="."> 
                                                                  
   <property name="global.dir" value="${basedir}"/>
 
@@ -54,7 +54,7 @@
     <mkdir dir="${javadoc.dir}" />
     
     <path id="javadoc.sourcepath">
-      <pathelement path="${basedir}/Cloud/${relative.src.dir}"/>
+      <pathelement path="${basedir}/Versioned/${relative.src.dir}"/>
     </path>
     
     <javadoc destdir="${javadoc.dir}"

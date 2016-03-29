@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="cloud" default="all" basedir=".">
+<project name="RAXVersioned" default="all" basedir=".">
 
   <property name="global.dir" value="${basedir}/.."/>
   <import file="${global.dir}/buildtools/common.xml"/> 
