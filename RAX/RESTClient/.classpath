@@ -36,5 +36,8 @@
 	<classpathentry kind="lib" path="/opt/atg/DAS/lib/slf4j-jdk14-1.5.11.jar"/>
 	<classpathentry kind="lib" path="/opt/atg/DAS/lib/spring-aop-1.2-rc1.jar"/>
 	<classpathentry kind="lib" path="/usr/local/atg/atg-11.1/Publishing/base/lib/classes.jar"/>
+	<classpathentry kind="lib" path="/usr/local/atg/atg-11.1/REST/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/usr/local/atg/atg-11.1/REST/lib/org.json.jar"/>
+	<classpathentry kind="lib" path="/usr/local/atg/atg-11.1/REST/client-lib/java/atg-rest-client-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
