@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 ATG-Client-Class-Path: lib/classes.jar
-ATG-Class-Path: lib/classes.jar
+ATG-Class-Path: lib/classes.jar lib/atg-rest-client-1.0.jar
 ATG-Config-Path: config/config.jar
 ATG-Required: REST
 ATG-LiveConfig-Path: liveconfig
